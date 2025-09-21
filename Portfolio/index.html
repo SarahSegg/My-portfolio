@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sarah Onchaba — Software Developer</title>
+  <meta name="description" content="Software Developer in Dayton, MN. HTML • CSS • JavaScript • MySQL." />
+  <style>
+    /* =====================
+       BOLD BLUE REDESIGN
+       ===================== */
+    :root{
+      --bg:#ffffff;                 /* white */
+      --ink:#0b1b3a;                /* deep navy text */
+      --muted:#58709c;              /* slate-ish */
+      --panel:#f4f7fb;              /* light panel */
+      --stroke:#e5edf8;             /* borders */
+      --blue:#2563eb;               /* primary blue */
+      --sky:#0ea5e9;                /* accent sky */
+      --violet:#7c3aed;             /* accent violet */
+      --glow:#c9e7ff;               
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--ink); background:var(--bg);
+      background-image:radial-gradient(60% 50% at -10% -10%, rgba(37,99,235,.10), transparent),
+                       radial-gradient(50% 40% at 110% -10%, rgba(14,165,233,.10), transparent),
+                       radial-gradient(60% 50% at 50% 120%, rgba(201,231,255,.35), transparent);
+    }
+
+    a{color:var(--blue); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .container{max-width:1200px; margin:0 auto; padding:24px}
+
+    /* HEADER */
+    header{position:sticky; top:0; background:rgba(255,255,255,.8); backdrop-filter:saturate(170%) blur(10px); border-bottom:1px solid var(--stroke); z-index:50}
+    header .bar{height:4px; background:linear-gradient(90deg,var(--blue),var(--sky),var(--violet)); background-size:200% 100%; animation:move 6s linear infinite}
+    @keyframes move{from{background-position:0 0} to{background-position:200% 0}}
+
+    nav{display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800}
+    .brand .dot{width:12px; height:12px; border-radius:999px; background:linear-gradient(45deg,var(--sky),var(--blue)); box-shadow:0 0 0 6px rgba(14,165,233,.18)}
+    .links a{margin-left:18px; font-size:14px; color:var(--muted); position:relative}
+    .links a::after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:linear-gradient(90deg,var(--blue),var(--sky)); transition:width .25s}
+    .links a:hover::after{width:100%}
+
+    /* HERO */
+    .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:32px; padding:56px 0}
+    .card{background:var(--panel); border:1px solid var(--stroke); border-radius:22px; padding:28px; box-shadow:0 16px 40px rgba(2,6,23,.06)}
+
+    h1{font-size:48px; line-height:1.10; margin:0 0 14px}
+    h2{font-size:28px; margin:26px 0 12px}
+    h3{font-size:20px; margin:18px 0 6px}
+    p{margin:0 0 12px}
+    .muted{color:var(--muted)}
+
+    .badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .badge{border:1px solid var(--stroke); background:#fff; border-radius:999px; padding:6px 12px; font-size:12px}
+
+    .btn{display:inline-block; padding:12px 18px; border-radius:12px; border:1px solid var(--stroke); font-weight:600; transition:transform .15s ease, box-shadow .2s ease}
+    .btn.primary{background:linear-gradient(45deg,var(--blue),var(--sky)); color:#fff; border:none; box-shadow:0 6px 24px rgba(37,99,235,.28)}
+    .btn.ghost{background:#fff}
+    .btn:hover{transform:translateY(-2px)}
+
+    /* PHOTO SHOWCASE */
+    .photo-wrap{position:relative}
+    .ring{position:absolute; inset:-10px; border-radius:26px; padding:10px; background:linear-gradient(120deg, rgba(37,99,235,.9), rgba(14,165,233,.9)); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; animation:glow 4s ease-in-out infinite alternate;}
+    @keyframes glow{from{opacity:.65; filter:blur(6px)} to{opacity:1; filter:blur(2px)}}
+    .photo{width:100%; display:block; border-radius:16px; box-shadow:0 18px 50px rgba(2,6,23,.18)}
+
+    /* SECTIONS */
+    .grid{display:grid; gap:18px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    @media (max-width:980px){.hero{grid-template-columns:1fr}.grid.cols-3{grid-template-columns:1fr}.grid.cols-2{grid-template-columns:1fr}}
+
+    .card.hover{position:relative; overflow:hidden}
+    .card.hover::before{content:""; position:absolute; inset:0; background:radial-gradient(600px 120px at var(--x,50%) -20%, rgba(37,99,235,.08), transparent); opacity:0; transition:opacity .25s}
+    .card.hover:hover::before{opacity:1}
+
+    /* PROJECT ICONS */
+    .icon{width:22px; height:22px; display:inline-block; vertical-align:-4px; margin-right:8px}
+
+    /* SCROLL REVEAL */
+    .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1; transform:translateY(0)}
+
+    footer{padding:48px 0; color:var(--muted); text-align:center}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="bar"></div>
+    <div class="container">
+      <nav>
+        <div class="brand"><span class="dot"></span> Sarah Onchaba</div>
+        <div class="links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+          <a href="#resume">Resume</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="card reveal" id="hero-text">
+        <div class="badges">
+          <span class="badge">HTML</span>
+          <span class="badge">CSS</span>
+          <span class="badge">JavaScript</span>
+          <span class="badge">MySQL</span>
+        </div>
+        <h1><span id="type">Software developer creates tools that solve real-world problems.</span></h1>
+        <p class="muted">Based in <strong>Dayton, MN</strong>. I focus on clean UI, data clarity, and practical features that feel effortless.</p>
+        <p style="margin-top:12px">
+          <a class="btn primary" href="#projects">Explore Projects</a>
+          <a class="btn ghost" style="margin-left:8px" href="#contact">Contact</a>
+        </p>
+      </div>
+
+      <div class="card reveal photo-wrap" id="hero-photo">
+        <div class="ring" aria-hidden="true"></div>
+        <!-- PLACE YOUR IMAGE HERE -->
+        <img class="photo" src="assets/profile.jpg" alt="Portrait of Sarah Onchaba" />
+        
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="reveal">
+      <h2>Featured Projects</h2>
+      <div class="grid cols-3">
+        <div class="card hover" onmousemove="hoverLight(event)">
+          <h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l9 4-9 4-9-4 9-4z" stroke-width="1.5"/><path d="M3 7l9 4 9-4" stroke-width="1.5"/><path d="M3 12l9 4 9-4" stroke-width="1.5"/></svg>Global Insight Dashboard — Nairobi</h3>
+          <p class="muted">Single‑page dashboard aggregating weather, air quality, and USD↔KES rates. Reliability via caching, fallbacks, and clear error states.</p>
+          <p><a class="btn" href="#" target="_blank" rel="noopener">Demo</a> <a class="btn" href="#" target="_blank" rel="noopener" style="margin-left:8px">Source</a></p>
+        </div>
+        <div class="card hover" onmousemove="hoverLight(event)">
+          <h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16v16H4z" stroke-width="1.5"/><path d="M4 9h16" stroke-width="1.5"/></svg>HudumaQ — Virtual Queueing</h3>
+          <p class="muted">Digital queue management for public service centres. MySQL backend, online tickets & scheduling to reduce wait times.</p>
+        </div>
+        <div class="card hover" onmousemove="hoverLight(event)">
+          <h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke-width="1.5"/></svg>Portfolio (This Site)</h3>
+          <p class="muted">Responsive, animated one‑file HTML/CSS site. Easy to maintain and deploy with GitHub Pages.</p>
+          <p><a class="btn" href="#resume">View Resume</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="reveal" style="margin-top:18px">
+      <h2>Experience</h2>
+      <div class="grid cols-2">
+        <div class="card hover" onmousemove="hoverLight(event)">
+          <h3>Global Insight Dashboard — Personal Project (Present)</h3>
+          <ul>
+            <li>Aggregates live weather, air quality, and USD↔KES rates for Nairobi.</li>
+            <li>Async APIs, caching, error handling, and fallback states for reliability.</li>
+            <li>Production‑style structure and responsive UI with clear metrics.</li>
+          </ul>
+        </div>
+        <div class="card hover" onmousemove="hoverLight(event)">
+          <h3>System Administration Intern — KENET (May 2024 – Aug 2024)</h3>
+          <ul>
+            <li>Customized & maintained the website (Drupal 9); migrated legacy content.</li>
+            <li>Worked with NOC on system administration, troubleshooting, monitoring.</li>
+            <li>Improved usability, accessibility, and system reliability.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="reveal" style="margin-top:18px">
+      <h2>Education</h2>
+      <div class="card hover" onmousemove="hoverLight(event)">
+        <p><strong>Bachelor of Science in Computer Science</strong><br/>Kibabii University, Kenya (2021 – 2025)</p>
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section id="resume" class="reveal" style="margin-top:18px">
+      <h2>Resume</h2>
+      <div class="card hover" onmousemove="hoverLight(event)">
+        <p><a class="btn primary" href="assets/Sara_Resume_Sep.pdf" target="_blank" rel="noopener">Download Resume (PDF)</a></p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="reveal" style="margin-top:18px">
+      <h2>Contact</h2>
+      <div class="card hover" onmousemove="hoverLight(event)">
+        <ul>
+          <li>Phone: <a href="tel:+16123805373">+1 (612) 380‑5373</a></li>
+          <li>Email: <a href="mailto:nyakerariosarah8@gmail.com">nyakerariosarah8@gmail.com</a></li>
+          <li>LinkedIn: <a href="https://linkedin.com/in/sarah-onchaba" target="_blank" rel="noopener">Sarah Onchaba</a></li>
+          <li>GitHub: <a href="https://github.com/SarahSegg" target="_blank" rel="noopener">github.com/SarahSegg</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <p class="muted">© <span id="y"></span> Sarah Onchaba — Built with HTML & CSS • Deployed on GitHub Pages</p>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} });
+    }, {threshold: 0.12});
+    reveals.forEach(el => io.observe(el));
+
+    // Moving highlight on hover cards
+    function hoverLight(e){
+      const r = e.currentTarget.getBoundingClientRect();
+      e.currentTarget.style.setProperty('--x', `${((e.clientX - r.left)/r.width)*100}%`);
+    }
+    window.hoverLight = hoverLight;
+
+    // Simple typewriter effect
+    const el = document.getElementById('type');
+    const full = el.textContent; el.textContent = '';
+    let i = 0; function type(){ if(i<=full.length){ el.textContent = full.slice(0,i++); setTimeout(type, 18);} }
+    type();
+  </script>
+</body>
+</html>
